@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy:      #1B2330;
+    --navy-deep: #0D1520;
+    --navy-soft: #252E3D;
+    --teal:      #00A8A8;
+    --teal-dark: #008080;
+    --gray:      #9AA3AF;
+    --offwhite:  #F2F2F2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply font-sans text-navy antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Botones primarios */
+  .btn-primary {
+    @apply bg-teal text-white font-bold px-6 py-3 rounded-lg
+           hover:bg-teal-dark transition-all duration-200
+           hover:-translate-y-0.5 hover:shadow-lg hover:shadow-teal/30
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none;
+  }
+
+  /* Botones secundarios */
+  .btn-secondary {
+    @apply border border-navy/20 text-navy font-semibold px-6 py-3 rounded-lg
+           hover:bg-navy/5 transition-all duration-200;
+  }
+
+  /* Cards base */
+  .card {
+    @apply bg-white rounded-2xl border border-gray/20 shadow-sm
+           hover:shadow-md transition-shadow duration-200;
+  }
+
+  /* Badge de nivel de curso */
+  .badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide;
+  }
+  .badge-teal  { @apply bg-teal/10 text-teal; }
+  .badge-navy  { @apply bg-navy/10 text-navy; }
+  .badge-gold  { @apply bg-amber-100 text-amber-700; }
+
+  /* Input base */
+  .input {
+    @apply w-full border border-gray/30 rounded-lg px-4 py-2.5 text-sm
+           focus:outline-none focus:ring-2 focus:ring-teal/40 focus:border-teal
+           placeholder:text-gray transition-colors;
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+  .gradient-navy { background: linear-gradient(160deg, #0D1520 0%, #1B2330 50%, #1a2840 100%); }
+}
