@@ -25,10 +25,10 @@ export default async function AcademiaPage({ searchParams }: Props) {
     query = query.ilike("title", `%${params.q}%`);
   }
   if (params.level) {
-    query = query.eq("level", params.level);
+    query = query.eq("level", params.level as any);
   }
   if (params.discipline) {
-    query = query.eq("discipline", params.discipline);
+    query = query.eq("discipline", params.discipline as any);
   }
   if (params.price === "free") {
     query = query.eq("price", 0);

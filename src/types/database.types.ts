@@ -1567,31 +1567,38 @@ export const Constants = {
 // Domain type aliases
 // ═══════════════════════════════════════════
 
-type Tables<T extends keyof Database["public"]["Tables"]> = Database["public"]["Tables"][T]["Row"]
-type Views<T extends keyof Database["public"]["Views"]> = Database["public"]["Views"][T]["Row"]
-type Enums<T extends keyof Database["public"]["Enums"]> = Database["public"]["Enums"][T]
+type TableRow<T extends keyof Database["public"]["Tables"]> = Database["public"]["Tables"][T]["Row"]
+type ViewRow<T extends keyof Database["public"]["Views"]> = Database["public"]["Views"][T]["Row"]
+type EnumVal<T extends keyof Database["public"]["Enums"]> = Database["public"]["Enums"][T]
 
 // Core types
-export type Course = Tables<"courses">
-export type CourseWithInstructor = Views<"v_courses_with_instructor">
-export type CourseLevel = Enums<"course_level">
-export type Discipline = Enums<"discipline">
+export type Course = TableRow<"courses">
+export type CourseWithInstructor = ViewRow<"v_courses_with_instructor">
+export type CourseLevel = EnumVal<"course_level">
+export type Discipline = EnumVal<"discipline">
 
 // Course sub-types
-export type CourseModule = Tables<"course_modules">
-export type CourseLesson = Tables<"course_lessons">
-export type CourseEnrollment = Tables<"course_enrollments">
-export type CourseReview = Tables<"course_reviews">
-export type LessonProgress = Tables<"lesson_progress">
+export type CourseModule = TableRow<"course_modules">
+export type CourseLesson = TableRow<"course_lessons">
+export type CourseEnrollment = TableRow<"course_enrollments">
+export type CourseReview = TableRow<"course_reviews">
+export type LessonProgress = TableRow<"lesson_progress">
 
 // Quiz types
-export type ModuleQuiz = Tables<"module_quizzes">
-export type QuizQuestion = Tables<"quiz_questions">
-export type QuizOption = Tables<"quiz_options">
-export type QuizAttempt = Tables<"quiz_attempts">
+export type ModuleQuiz = TableRow<"module_quizzes">
+export type QuizQuestion = TableRow<"quiz_questions">
+export type QuizOption = TableRow<"quiz_options">
+export type QuizAttempt = TableRow<"quiz_attempts">
 
 // Certificate types
-export type CourseCertificate = Tables<"course_certificates">
+export type CourseCertificate = TableRow<"course_certificates">
+
+// Other domain types
+export type Profile = TableRow<"profiles">
+export type ContentItem = TableRow<"content_items">
+export type Event = TableRow<"events">
+export type ForumCategory = TableRow<"forum_categories">
+export type MembershipPlan = TableRow<"membership_plans">
 
 // Composite types for frontend
 export type ModuleWithLessons = CourseModule & {
