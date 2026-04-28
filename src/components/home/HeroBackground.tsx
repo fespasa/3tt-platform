@@ -61,7 +61,7 @@ export default function HeroBackground() {
       <div className="absolute top-[60%] left-[15%] w-4 h-4 border border-teal/10 rounded-full animate-float" style={{ animationDelay: "4s" }} />
       <div className="absolute top-[70%] right-[20%] w-2.5 h-2.5 border border-teal/15 rotate-12 animate-float" style={{ animationDelay: "1s" }} />
       <div className="absolute top-[40%] left-[75%] w-1.5 h-1.5 bg-teal/20 rounded-full animate-float" style={{ animationDelay: "3s" }} />
-      <div className="absolute top-[80%] left-[40%] w-3 h-3 border border-white/5 rotate-45 animate-float" style={{ animationDelay: "5s" }} />
+      <div className="absolute top-[80%] left-[40%] w-3 h-3 rotate-45 animate-float" style={{ animationDelay: "5s", border: "1px solid var(--border)" }} />
 
       {/* Volleyball trajectory dots (the 3 touches) */}
       <div className="absolute top-[30%] left-[25%] flex items-center gap-1.5 opacity-0 animate-fade-in" style={{ animationDelay: "1.5s" }}>
@@ -77,8 +77,8 @@ export default function HeroBackground() {
       </div>
 
       {/* Grid dots pattern */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: "radial-gradient(circle, var(--text-primary) 1px, transparent 1px)",
         backgroundSize: "40px 40px",
       }} />
     </div>

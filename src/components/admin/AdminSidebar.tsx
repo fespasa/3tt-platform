@@ -1,6 +1,8 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const NAV = [
   { href: "/admin",           label: "Dashboard",   icon: "📊" },
@@ -17,27 +19,27 @@ export default function AdminSidebar({ open, onClose }: { open: boolean; onClose
 
   return (
     <>
-      {/* overlay mobile */}
-      {open && <div className="fixed inset-0 bg-black/50 z-40 lg:hidden" onClick={onClose} />}
+      {open && <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden" onClick={onClose} />}
 
-      <aside className={`
-        fixed top-0 left-0 z-50 h-full w-64 gradient-navy text-white flex flex-col
-        transform transition-transform duration-300
-        ${open ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0 lg:static lg:z-auto
-      `}>
-        {/* Logo */}
-        <div className="px-6 py-5 border-b border-white/10">
+      <aside
+        className={`
+          fixed top-0 left-0 z-50 h-full w-64 flex flex-col
+          transform transition-transform duration-300
+          ${open ? "translate-x-0" : "-translate-x-full"}
+          lg:translate-x-0 lg:static lg:z-auto
+        `}
+        style={{ background: "var(--bg-admin-side)", borderRight: "1px solid var(--border)" }}
+      >
+        <div className="px-6 py-5" style={{ borderBottom: "1px solid var(--border)" }}>
           <Link href="/admin" className="flex items-center gap-3" onClick={onClose}>
-            <span className="text-2xl">🏐</span>
+            <Image src="/images/logo-3tt.svg" alt="3TT" width={24} height={29} />
             <div>
-              <p className="font-black text-sm tracking-widest">3TT ADMIN</p>
-              <p className="text-[10px] text-white/40 uppercase tracking-wider">Panel de gestión</p>
+              <p className="font-display text-lg tracking-wider text-foreground">3TT ADMIN</p>
+              <p className="text-[10px] text-muted uppercase tracking-wider">Panel de gestión</p>
             </div>
           </Link>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
           {NAV.map(item => {
             const active = pathname === item.href || (item.href !== "/admin" && pathname.startsWith(item.href));
@@ -47,25 +49,32 @@ export default function AdminSidebar({ open, onClose }: { open: boolean; onClose
                 href={item.href}
                 onClick={onClose}
                 className={`
-                  flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all
+                  flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all
                   ${active
-                    ? "bg-teal/20 text-teal"
-                    : "text-white/60 hover:bg-white/5 hover:text-white"
+                    ? "border"
+                    : "border border-transparent hover:opacity-80"
                   }
                 `}
+                style={active ? {
+                  background: "var(--admin-active)",
+                  color: "var(--admin-active-text)",
+                  borderColor: "rgba(0,168,168,0.2)",
+                } : {
+                  color: "var(--text-muted)",
+                }}
               >
-                <span className="text-lg">{item.icon}</span>
+                <span className="text-lg opacity-80">{item.icon}</span>
                 {item.label}
               </Link>
             );
           })}
         </nav>
 
-        {/* Footer */}
-        <div className="px-6 py-4 border-t border-white/10">
-          <Link href="/" className="text-xs text-white/40 hover:text-white/60 transition-colors">
+        <div className="px-6 py-4 flex items-center justify-between" style={{ borderTop: "1px solid var(--border)" }}>
+          <Link href="/" className="text-xs text-muted hover:text-teal transition-colors">
             ← Volver a la web
           </Link>
+          <ThemeToggle />
         </div>
       </aside>
     </>

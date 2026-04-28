@@ -22,14 +22,15 @@ export default function Modal({ open, onClose, title, children, wide }: ModalPro
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
-      <div className="absolute inset-0 bg-black/60" onClick={onClose} />
+      <div className="absolute inset-0 backdrop-blur-sm" style={{ background: "var(--bg-overlay)" }} onClick={onClose} />
       <div
         ref={ref}
-        className={`relative bg-white rounded-2xl shadow-2xl w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-h-[90vh] flex flex-col animate-fade-in`}
+        className={`relative backdrop-blur-xl rounded-3xl w-full ${wide ? "max-w-2xl" : "max-w-lg"} max-h-[90vh] flex flex-col animate-fade-in`}
+        style={{ background: "var(--bg-card)", border: "1px solid var(--border)", boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}
       >
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray/20">
-          <h2 className="font-black text-navy text-lg">{title}</h2>
-          <button onClick={onClose} className="text-gray3tt hover:text-navy text-xl leading-none">&times;</button>
+        <div className="flex items-center justify-between px-6 py-4" style={{ borderBottom: "1px solid var(--border)" }}>
+          <h2 className="font-display text-2xl text-foreground">{title}</h2>
+          <button onClick={onClose} className="text-muted hover:text-foreground text-xl leading-none transition-colors">&times;</button>
         </div>
         <div className="px-6 py-5 overflow-y-auto flex-1">
           {children}

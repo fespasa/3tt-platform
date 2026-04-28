@@ -72,8 +72,8 @@ export default function AdminForo() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-black text-navy">Categorías del foro</h1>
-          <p className="text-gray3tt text-sm mt-1">{cats.length} categorías</p>
+          <h1 className="font-display text-3xl text-foreground">Categorías del foro</h1>
+          <p className="text-muted text-sm mt-1">{cats.length} categorías</p>
         </div>
         <button onClick={openNew} className="btn-primary !text-sm !py-2 !px-5">+ Nueva categoría</button>
       </div>
@@ -82,29 +82,29 @@ export default function AdminForo() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray/20 text-left">
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Pos</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Icono</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Nombre</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Slug</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Rol</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Estado</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Acciones</th>
+              <tr className="border-b border-theme text-left">
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Pos</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Icono</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Nombre</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Slug</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Rol</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Estado</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {cats.map(cat => (
-                <tr key={cat.id} className="border-b border-gray/10 hover:bg-offwhite/50 transition-colors">
+                <tr key={cat.id} className="border-b border-theme hover:bg-teal/[0.03] transition-colors">
                   <td className="px-4 py-3 text-gray3tt">{cat.position}</td>
                   <td className="px-4 py-3 text-xl">{cat.icon}</td>
-                  <td className="px-4 py-3 font-semibold text-navy">{cat.name}</td>
+                  <td className="px-4 py-3 font-semibold text-foreground">{cat.name}</td>
                   <td className="px-4 py-3 text-gray3tt font-mono text-xs">{cat.slug}</td>
                   <td className="px-4 py-3 text-gray3tt text-xs">{cat.target_role ?? "Todos"}</td>
                   <td className="px-4 py-3"><StatusBadge status={cat.is_active ?? true} /></td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <button onClick={() => openEdit(cat)} className="text-teal hover:underline text-xs font-semibold">Editar</button>
-                      <button onClick={() => toggleActive(cat)} className="text-gray3tt hover:text-navy text-xs">
+                      <button onClick={() => toggleActive(cat)} className="text-muted hover:text-foreground text-xs">
                         {cat.is_active ? "Desactivar" : "Activar"}
                       </button>
                       <button onClick={() => del(cat)} className="text-red-400 hover:text-red-600 text-xs">Eliminar</button>
@@ -121,29 +121,29 @@ export default function AdminForo() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Nombre</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Nombre</label>
               <input className="input" value={form.name} onChange={e => set("name", e.target.value)} placeholder="Técnica individual" />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Slug</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Slug</label>
               <input className="input font-mono" value={form.slug} onChange={e => set("slug", e.target.value)} placeholder="tecnica" />
             </div>
           </div>
           <div>
-            <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Descripción</label>
+            <label className="text-xs font-bold text-muted uppercase mb-1 block">Descripción</label>
             <textarea className="input" rows={2} value={form.description} onChange={e => set("description", e.target.value)} />
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Icono</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Icono</label>
               <input className="input text-center text-xl" value={form.icon} onChange={e => set("icon", e.target.value)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Posición</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Posición</label>
               <input className="input" type="number" value={form.position} onChange={e => set("position", parseInt(e.target.value) || 0)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Rol destino</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Rol destino</label>
               <select className="input" value={form.target_role} onChange={e => set("target_role", e.target.value)}>
                 <option value="">Todos</option>
                 <option value="player">Jugadores</option>
@@ -154,9 +154,9 @@ export default function AdminForo() {
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.is_active} onChange={e => set("is_active", e.target.checked)} className="accent-teal w-4 h-4" />
-            <span className="text-sm font-medium text-navy">Activa</span>
+            <span className="text-sm font-medium text-secondary">Activa</span>
           </label>
-          <div className="flex justify-end gap-3 pt-3 border-t border-gray/20">
+          <div className="flex justify-end gap-3 pt-3 border-t border-theme">
             <button onClick={() => setModalOpen(false)} className="btn-secondary !py-2 !px-4 !text-sm">Cancelar</button>
             <button onClick={save} disabled={saving || !form.name || !form.slug} className="btn-primary !py-2 !px-4 !text-sm">
               {saving ? "Guardando..." : editing ? "Guardar cambios" : "Crear categoría"}

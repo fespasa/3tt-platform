@@ -51,12 +51,12 @@ export default async function HomePage() {
               </div>
 
               <h1 className="heading-xl mb-6 animate-fade-up" style={{ animationDelay: "0.4s" }}>
-                <span className="text-white">3TOUCH</span>
+                <span className="text-foreground">3TOUCH</span>
                 <br />
                 <span className="text-gradient">TRIBE</span>
               </h1>
 
-              <p className="text-white/50 text-lg md:text-xl max-w-lg leading-relaxed mb-10 animate-fade-up font-body" style={{ animationDelay: "0.6s" }}>
+              <p className="text-secondary text-lg md:text-xl max-w-lg leading-relaxed mb-10 animate-fade-up font-body" style={{ animationDelay: "0.6s" }}>
                 Formación de calidad, comunidad activa y experiencias live para
                 jugadores, entrenadores y profesionales del volleyball.
               </p>
@@ -76,15 +76,15 @@ export default async function HomePage() {
                 <div className="flex items-center gap-2">
                   <div className="flex -space-x-2">
                     {[1,2,3,4].map(i => (
-                      <div key={i} className="w-8 h-8 rounded-full bg-navy-soft border-2 border-navy-deep flex items-center justify-center">
+                      <div key={i} className="w-8 h-8 rounded-full bg-surface-alt border-2 border-theme flex items-center justify-center" style={{ borderColor: "var(--bg-primary)" }}>
                         <Users size={12} className="text-teal/60" />
                       </div>
                     ))}
                   </div>
-                  <span className="text-white/40 text-sm">+500 miembros</span>
+                  <span className="text-muted text-sm">+500 miembros</span>
                 </div>
-                <div className="w-px h-6 bg-white/10" />
-                <div className="flex items-center gap-1.5 text-white/40 text-sm">
+                <div className="w-px h-6" style={{ background: "var(--border)" }} />
+                <div className="flex items-center gap-1.5 text-muted text-sm">
                   <div className="w-2 h-2 bg-green-400 rounded-full" />
                   100% en español
                 </div>
@@ -111,8 +111,8 @@ export default async function HomePage() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in" style={{ animationDelay: "1.5s" }}>
-          <span className="text-white/20 text-xs uppercase tracking-widest">Scroll</span>
-          <div className="w-5 h-8 border border-white/15 rounded-full flex justify-center pt-1.5">
+          <span className="text-muted text-xs uppercase tracking-widest" style={{ opacity: 0.5 }}>Scroll</span>
+          <div className="w-5 h-8 rounded-full flex justify-center pt-1.5" style={{ border: "1px solid var(--border)" }}>
             <div className="w-1 h-2 bg-teal/50 rounded-full animate-bounce" />
           </div>
         </div>
@@ -127,7 +127,7 @@ export default async function HomePage() {
           <ScrollReveal>
             <div className="text-center mb-20">
               <span className="section-label">Todo en un lugar</span>
-              <h2 className="heading-lg text-white mt-4">
+              <h2 className="heading-lg text-foreground mt-4">
                 Hecho para la <span className="text-gradient">tribu</span>
               </h2>
             </div>
@@ -140,28 +140,24 @@ export default async function HomePage() {
                 title: "Academia",
                 text: "Cursos en vídeo con instructores de élite. Técnica, táctica, preparación física y mentalidad.",
                 href: "/academia",
-                color: "teal",
               },
               {
                 icon: Users,
                 title: "Comunidad",
                 text: "Foros activos para debatir, preguntar y conectar con jugadores y entrenadores de toda España y LATAM.",
                 href: "/comunidad",
-                color: "blue",
               },
               {
                 icon: Mic,
                 title: "Podcast",
                 text: "Entrevistas y análisis con referentes del volleyball. Escucha en cualquier momento.",
                 href: "/podcast",
-                color: "purple",
               },
               {
                 icon: Calendar,
                 title: "Eventos",
                 text: "Torneos, campus y meetups. Experiencias live que conectan a la tribu en persona.",
                 href: "/eventos",
-                color: "amber",
               },
             ].map((f, i) => (
               <ScrollReveal key={f.title} delay={i * 100}>
@@ -169,8 +165,8 @@ export default async function HomePage() {
                   <div className="w-12 h-12 rounded-xl bg-teal/10 border border-teal/20 flex items-center justify-center mb-5 group-hover:bg-teal/20 group-hover:border-teal/30 transition-all duration-500">
                     <f.icon size={22} className="text-teal" />
                   </div>
-                  <h3 className="font-display text-2xl text-white mb-3 group-hover:text-teal transition-colors">{f.title}</h3>
-                  <p className="text-white/40 text-sm leading-relaxed mb-4">{f.text}</p>
+                  <h3 className="font-display text-2xl text-foreground mb-3 group-hover:text-teal transition-colors">{f.title}</h3>
+                  <p className="text-muted text-sm leading-relaxed mb-4">{f.text}</p>
                   <div className="flex items-center gap-1 text-teal/60 text-sm font-semibold group-hover:text-teal group-hover:gap-2 transition-all">
                     Explorar <ChevronRight size={14} />
                   </div>
@@ -206,7 +202,7 @@ export default async function HomePage() {
               <div className="flex items-end justify-between mb-12">
                 <div>
                   <span className="section-label">Formación</span>
-                  <h2 className="heading-md text-white mt-4">Últimos cursos</h2>
+                  <h2 className="heading-md text-foreground mt-4">Últimos cursos</h2>
                 </div>
                 <Link href="/academia" className="hidden md:flex items-center gap-2 text-teal text-sm font-semibold hover:gap-3 transition-all">
                   Ver todos <ArrowRight size={16} />
@@ -218,7 +214,7 @@ export default async function HomePage() {
               {courses.map((course, i) => (
                 <ScrollReveal key={course.id} delay={i * 150}>
                   <Link href={`/academia/${course.slug}`} className="card-glow group block overflow-hidden">
-                    <div className="aspect-video bg-navy relative overflow-hidden">
+                    <div className="aspect-video relative overflow-hidden" style={{ background: "var(--bg-tertiary)" }}>
                       {course.thumbnail_url ? (
                         <img
                           src={course.thumbnail_url}
@@ -226,24 +222,24 @@ export default async function HomePage() {
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-navy-soft to-navy">
+                        <div className="w-full h-full flex items-center justify-center bg-surface-alt">
                           <Play size={40} className="text-teal/30" />
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/80 via-transparent to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                       <div className="absolute bottom-3 left-3">
                         <span className="badge badge-teal text-[10px]">{course.level ?? "todos"}</span>
                       </div>
                     </div>
                     <div className="p-5">
-                      <h3 className="font-semibold text-white text-sm leading-tight mb-3 group-hover:text-teal transition-colors">
+                      <h3 className="font-semibold text-foreground text-sm leading-tight mb-3 group-hover:text-teal transition-colors">
                         {course.title}
                       </h3>
                       <div className="flex items-center justify-between">
                         <span className="text-teal font-bold text-lg font-display">
                           {course.price > 0 ? `${course.price}€` : "GRATIS"}
                         </span>
-                        <ArrowRight size={16} className="text-white/20 group-hover:text-teal group-hover:translate-x-1 transition-all" />
+                        <ArrowRight size={16} className="text-muted group-hover:text-teal group-hover:translate-x-1 transition-all" />
                       </div>
                     </div>
                   </Link>
@@ -267,12 +263,12 @@ export default async function HomePage() {
             <ScrollReveal variant="left">
               <div>
                 <span className="section-label">Por qué 3Touch Tribe</span>
-                <h2 className="heading-lg text-white mt-4 mb-8">
+                <h2 className="heading-lg text-foreground mt-4 mb-8">
                   El volleyball merece
                   <br />
                   <span className="text-gradient">su propia casa</span>
                 </h2>
-                <p className="text-white/40 text-lg leading-relaxed mb-8">
+                <p className="text-secondary text-lg leading-relaxed mb-8">
                   Creamos el espacio que la comunidad volleybolera siempre necesitó:
                   contenido profesional en español, una comunidad real y experiencias
                   que te hacen crecer dentro y fuera de la cancha.
@@ -287,7 +283,7 @@ export default async function HomePage() {
                       <div className="w-10 h-10 rounded-lg bg-teal/10 border border-teal/20 flex items-center justify-center flex-shrink-0">
                         <item.icon size={18} className="text-teal" />
                       </div>
-                      <span className="text-white/60 text-sm">{item.text}</span>
+                      <span className="text-secondary text-sm">{item.text}</span>
                     </div>
                   ))}
                 </div>
@@ -297,7 +293,7 @@ export default async function HomePage() {
             <ScrollReveal variant="right" delay={200}>
               <div className="relative">
                 {/* Abstract volleyball court visualization */}
-                <div className="aspect-square relative rounded-3xl overflow-hidden border border-white/[0.06] bg-navy-soft/40">
+                <div className="aspect-square relative rounded-3xl overflow-hidden" style={{ background: "var(--bg-card)", border: "1px solid var(--border)" }}>
                   <svg viewBox="0 0 400 400" className="w-full h-full" fill="none">
                     {/* Court perspective */}
                     <defs>
@@ -345,14 +341,14 @@ export default async function HomePage() {
                 </div>
 
                 {/* Floating stat card */}
-                <div className="absolute -bottom-4 -right-4 bg-navy-soft/80 backdrop-blur-xl border border-white/10 rounded-xl p-4 shadow-2xl">
+                <div className="absolute -bottom-4 -right-4 backdrop-blur-xl rounded-xl p-4 shadow-2xl" style={{ background: "var(--bg-card)", border: "1px solid var(--border-hover)" }}>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-teal/20 flex items-center justify-center">
                       <Trophy size={18} className="text-teal" />
                     </div>
                     <div>
-                      <div className="text-white text-sm font-bold">3 Toques</div>
-                      <div className="text-white/40 text-xs">Recepción · Colocación · Ataque</div>
+                      <div className="text-foreground text-sm font-bold">3 Toques</div>
+                      <div className="text-muted text-xs">Recepción · Colocación · Ataque</div>
                     </div>
                   </div>
                 </div>
@@ -373,7 +369,7 @@ export default async function HomePage() {
               <div className="flex items-end justify-between mb-12">
                 <div>
                   <span className="section-label">Conversaciones</span>
-                  <h2 className="heading-md text-white mt-4">En la comunidad</h2>
+                  <h2 className="heading-md text-foreground mt-4">En la comunidad</h2>
                 </div>
                 <Link href="/comunidad" className="flex items-center gap-2 text-teal text-sm font-semibold hover:gap-3 transition-all">
                   Ver todo <ArrowRight size={16} />
@@ -394,10 +390,10 @@ export default async function HomePage() {
                         <Users size={18} className="text-teal/60" />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-white text-sm truncate group-hover:text-teal transition-colors">{thread.title}</p>
-                        {cat && <p className="text-xs text-white/30 mt-0.5">{cat.name}</p>}
+                        <p className="font-semibold text-foreground text-sm truncate group-hover:text-teal transition-colors">{thread.title}</p>
+                        {cat && <p className="text-xs text-muted mt-0.5">{cat.name}</p>}
                       </div>
-                      <ChevronRight size={16} className="text-white/10 group-hover:text-teal/50 transition-colors flex-shrink-0" />
+                      <ChevronRight size={16} className="text-muted group-hover:text-teal/50 transition-colors flex-shrink-0" />
                     </Link>
                   </ScrollReveal>
                 );
@@ -420,10 +416,10 @@ export default async function HomePage() {
 
         <ScrollReveal variant="scale">
           <div className="relative z-10 max-w-3xl mx-auto text-center">
-            <h2 className="heading-lg text-white mb-6">
+            <h2 className="heading-lg text-foreground mb-6">
               Únete a la <span className="text-gradient">tribu</span>
             </h2>
-            <p className="text-white/40 text-xl leading-relaxed mb-10 max-w-xl mx-auto">
+            <p className="text-secondary text-xl leading-relaxed mb-10 max-w-xl mx-auto">
               Regístrate gratis y accede al podcast, los foros y contenidos exclusivos.
               La comunidad del volleyball te espera.
             </p>
@@ -433,7 +429,7 @@ export default async function HomePage() {
                 <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
-            <p className="text-white/20 text-xs mt-6">Sin compromiso · Cancela cuando quieras</p>
+            <p className="text-muted text-xs mt-6" style={{ opacity: 0.5 }}>Sin compromiso · Cancela cuando quieras</p>
           </div>
         </ScrollReveal>
       </section>

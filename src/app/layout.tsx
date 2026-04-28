@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bebas_Neue, Plus_Jakarta_Sans } from "next/font/google";
+import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
 const bebasNeue = Bebas_Neue({
@@ -29,8 +30,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es" className={`${bebasNeue.variable} ${jakarta.variable}`}>
-      <body className="bg-navy-deep text-white antialiased font-body">{children}</body>
+    <html lang="es" className={`${bebasNeue.variable} ${jakarta.variable}`} suppressHydrationWarning>
+      <body className="bg-background text-foreground antialiased font-body transition-colors duration-300">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -40,16 +40,16 @@ export default function AdminDashboard() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="text-3xl font-black text-navy tracking-tight">Dashboard</h1>
-        <p className="text-gray3tt text-sm mt-1">Vista general de 3Touch Tribe</p>
+        <h1 className="font-display text-4xl text-foreground">Dashboard</h1>
+        <p className="text-muted text-sm mt-1">Vista general de 3Touch Tribe</p>
       </div>
 
       {!stats ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           {Array.from({ length: 6 }).map((_, i) => (
             <div key={i} className="card p-5 animate-pulse">
-              <div className="h-4 bg-gray/20 rounded w-20 mb-3" />
-              <div className="h-8 bg-gray/20 rounded w-16" />
+              <div className="h-4 rounded w-20 mb-3" style={{ background: "var(--border)" }} />
+              <div className="h-8 rounded w-16" style={{ background: "var(--border)" }} />
             </div>
           ))}
         </div>
@@ -64,9 +64,8 @@ export default function AdminDashboard() {
         </div>
       )}
 
-      {/* Quick actions */}
       <div className="mt-10">
-        <h2 className="text-lg font-black text-navy mb-4">Acciones rápidas</h2>
+        <h2 className="font-display text-2xl text-foreground mb-4">Acciones rápidas</h2>
         <div className="flex flex-wrap gap-3">
           <a href="/admin/contenido" className="btn-primary !text-sm !py-2 !px-5">+ Nuevo contenido</a>
           <a href="/admin/eventos" className="btn-primary !text-sm !py-2 !px-5">+ Nuevo evento</a>
@@ -75,13 +74,9 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-      {/* Placeholder hero image */}
-      <div className="mt-10 rounded-2xl overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=1200&h=400&fit=crop"
-          alt="Volleyball action"
-          className="w-full h-48 object-cover"
-        />
+      <div className="mt-10 card p-8">
+        <p className="font-display text-2xl text-foreground mb-2">Bienvenido al panel de gestión</p>
+        <p className="text-muted text-sm">Administra el contenido, la comunidad y los eventos de 3Touch Tribe desde aquí.</p>
       </div>
     </div>
   );

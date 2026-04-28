@@ -112,8 +112,8 @@ export default function AdminContenido() {
     <div>
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-black text-navy">Contenido</h1>
-          <p className="text-gray3tt text-sm mt-1">Podcast, entrevistas, artículos y reportajes</p>
+          <h1 className="font-display text-3xl text-foreground">Contenido</h1>
+          <p className="text-muted text-sm mt-1">Podcast, entrevistas, artículos y reportajes</p>
         </div>
         <button onClick={openNew} className="btn-primary !text-sm !py-2 !px-5">+ Nuevo contenido</button>
       </div>
@@ -125,7 +125,7 @@ export default function AdminContenido() {
             key={t.value}
             onClick={() => setFilter(t.value)}
             className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
-              filter === t.value ? "bg-teal text-white" : "bg-white text-gray3tt border border-gray/20 hover:border-teal/40"
+              filter === t.value ? "bg-teal text-white" : "bg-teal/5 text-muted border border-theme hover:border-teal/30"
             }`}
           >
             {t.label}
@@ -137,24 +137,24 @@ export default function AdminContenido() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray/20 text-left">
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Imagen</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Título</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Tipo</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Estado</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Vistas</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Acciones</th>
+              <tr className="border-b border-theme text-left">
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Imagen</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Título</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Tipo</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Estado</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Vistas</th>
+                <th className="px-4 py-3 text-xs font-bold text-muted uppercase">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {items.length === 0 && (
-                <tr><td colSpan={6} className="px-4 py-12 text-center text-gray3tt">
+                <tr><td colSpan={6} className="px-4 py-12 text-center text-muted">
                   <div className="text-4xl mb-2">🎙️</div>
                   No hay contenido aún. ¡Crea el primero!
                 </td></tr>
               )}
               {items.map(item => (
-                <tr key={item.id} className="border-b border-gray/10 hover:bg-offwhite/50">
+                <tr key={item.id} className="border-b border-theme hover:bg-teal/[0.03]">
                   <td className="px-4 py-2">
                     <img
                       src={item.thumbnail_url || PLACEHOLDER_IMAGES[item.type] || ""}
@@ -162,14 +162,14 @@ export default function AdminContenido() {
                       className="w-16 h-10 object-cover rounded-lg"
                     />
                   </td>
-                  <td className="px-4 py-3 font-semibold text-navy max-w-[200px] truncate">{item.title}</td>
+                  <td className="px-4 py-3 font-semibold text-foreground max-w-[200px] truncate">{item.title}</td>
                   <td className="px-4 py-3"><span className="badge badge-navy text-[10px]">{item.type}</span></td>
                   <td className="px-4 py-3"><StatusBadge status={item.is_published ?? false} /></td>
                   <td className="px-4 py-3 text-gray3tt">{item.views ?? 0}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
                       <button onClick={() => openEdit(item)} className="text-teal hover:underline text-xs font-semibold">Editar</button>
-                      <button onClick={() => togglePublish(item)} className="text-gray3tt hover:text-navy text-xs">
+                      <button onClick={() => togglePublish(item)} className="text-muted hover:text-white text-xs">
                         {item.is_published ? "Despublicar" : "Publicar"}
                       </button>
                       <button onClick={() => del(item)} className="text-red-400 hover:text-red-600 text-xs">Eliminar</button>
@@ -186,55 +186,55 @@ export default function AdminContenido() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Título</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Título</label>
               <input className="input" value={form.title} onChange={e => set("title", e.target.value)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Slug</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Slug</label>
               <input className="input font-mono" value={form.slug} onChange={e => set("slug", e.target.value)} />
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Tipo</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Tipo</label>
               <select className="input" value={form.type} onChange={e => set("type", e.target.value)}>
                 {TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Tags (separados por coma)</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">Tags (separados por coma)</label>
               <input className="input" value={form.tags} onChange={e => set("tags", e.target.value)} placeholder="voleibol, entrevista" />
             </div>
           </div>
           <div>
-            <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Descripción</label>
+            <label className="text-xs font-bold text-muted uppercase mb-1 block">Descripción</label>
             <textarea className="input" rows={2} value={form.description} onChange={e => set("description", e.target.value)} />
           </div>
           <div>
-            <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Contenido (Markdown)</label>
+            <label className="text-xs font-bold text-muted uppercase mb-1 block">Contenido (Markdown)</label>
             <textarea className="input font-mono text-xs" rows={6} value={form.content_body} onChange={e => set("content_body", e.target.value)} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">URL de audio</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">URL de audio</label>
               <input className="input" value={form.audio_url} onChange={e => set("audio_url", e.target.value)} placeholder="https://..." />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">URL thumbnail</label>
+              <label className="text-xs font-bold text-muted uppercase mb-1 block">URL thumbnail</label>
               <input className="input" value={form.thumbnail_url} onChange={e => set("thumbnail_url", e.target.value)} placeholder="Se autoasigna si vacío" />
             </div>
           </div>
           <div className="flex gap-6">
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={form.is_published} onChange={e => set("is_published", e.target.checked)} className="accent-teal w-4 h-4" />
-              <span className="text-sm font-medium text-navy">Publicado</span>
+              <span className="text-sm font-medium text-secondary">Publicado</span>
             </label>
             <label className="flex items-center gap-2 cursor-pointer">
               <input type="checkbox" checked={form.is_premium} onChange={e => set("is_premium", e.target.checked)} className="accent-teal w-4 h-4" />
-              <span className="text-sm font-medium text-navy">Premium</span>
+              <span className="text-sm font-medium text-secondary">Premium</span>
             </label>
           </div>
-          <div className="flex justify-end gap-3 pt-3 border-t border-gray/20">
+          <div className="flex justify-end gap-3 pt-3 border-t border-theme">
             <button onClick={() => setModalOpen(false)} className="btn-secondary !py-2 !px-4 !text-sm">Cancelar</button>
             <button onClick={save} disabled={saving || !form.title || !form.slug} className="btn-primary !py-2 !px-4 !text-sm">
               {saving ? "Guardando..." : editing ? "Guardar" : "Crear"}

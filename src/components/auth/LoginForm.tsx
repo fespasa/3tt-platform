@@ -47,13 +47,13 @@ export default function LoginForm() {
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       {error && (
-        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm rounded-xl px-4 py-3">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-500 dark:text-red-400 text-sm rounded-xl px-4 py-3">
           {error}
         </div>
       )}
 
       <div>
-        <label className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1.5">
+        <label className="text-secondary text-xs font-semibold uppercase tracking-wider block mb-1.5">
           Email
         </label>
         <input
@@ -67,7 +67,7 @@ export default function LoginForm() {
       </div>
 
       <div>
-        <label className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1.5">
+        <label className="text-secondary text-xs font-semibold uppercase tracking-wider block mb-1.5">
           Contraseña
         </label>
         <input

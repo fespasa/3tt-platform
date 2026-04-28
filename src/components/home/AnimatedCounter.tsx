@@ -62,10 +62,10 @@ export default function AnimatedCounter({
 
   return (
     <div ref={ref} className="text-center">
-      <div className="font-display text-5xl md:text-7xl text-white mb-1 tabular-nums">
+      <div className="font-display text-5xl md:text-7xl text-foreground mb-1 tabular-nums">
         {prefix}{started ? count.toLocaleString("es-ES") : "0"}{suffix}
       </div>
-      <div className="text-white/40 text-sm font-medium uppercase tracking-wider">{label}</div>
+      <div className="text-muted text-sm font-medium uppercase tracking-wider">{label}</div>
     </div>
   );
 }
