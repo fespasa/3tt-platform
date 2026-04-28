@@ -39,8 +39,8 @@ export default function AdminNewsletter() {
     <div>
       <div className="flex items-center justify-between mb-6 flex-wrap gap-3">
         <div>
-          <h1 className="text-2xl font-black text-navy">Newsletter</h1>
-          <p className="text-gray3tt text-sm mt-1">Suscriptores de la lista de correo</p>
+          <h1 className="font-display text-3xl text-white">Newsletter</h1>
+          <p className="text-white/35 text-sm mt-1">Suscriptores de la lista de correo</p>
         </div>
         <button onClick={copyEmails} className="btn-secondary !text-sm !py-2 !px-5">
           {copied ? "✓ Copiados" : "Copiar emails activos"}
@@ -57,25 +57,25 @@ export default function AdminNewsletter() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray/20 text-left">
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Email</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Fuente</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Tags</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Estado</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Fecha</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Acciones</th>
+              <tr className="border-b border-white/[0.06] text-left">
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Email</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Fuente</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Tags</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Estado</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Fecha</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {subs.length === 0 && (
-                <tr><td colSpan={6} className="px-4 py-12 text-center text-gray3tt">
+                <tr><td colSpan={6} className="px-4 py-12 text-center text-white/30">
                   <div className="text-4xl mb-2">📧</div>
                   No hay suscriptores aún.
                 </td></tr>
               )}
               {subs.map(sub => (
-                <tr key={sub.id} className="border-b border-gray/10 hover:bg-offwhite/50">
-                  <td className="px-4 py-3 font-mono text-sm text-navy">{sub.email}</td>
+                <tr key={sub.id} className="border-b border-white/[0.04] hover:bg-white/[0.03]">
+                  <td className="px-4 py-3 font-mono text-sm text-white">{sub.email}</td>
                   <td className="px-4 py-3 text-gray3tt text-xs">{sub.source ?? "—"}</td>
                   <td className="px-4 py-3">
                     {sub.tags?.map(tag => (
@@ -87,7 +87,7 @@ export default function AdminNewsletter() {
                     {sub.created_at ? new Date(sub.created_at).toLocaleDateString("es-ES") : "—"}
                   </td>
                   <td className="px-4 py-3">
-                    <button onClick={() => toggleActive(sub)} className="text-gray3tt hover:text-navy text-xs">
+                    <button onClick={() => toggleActive(sub)} className="text-white/40 hover:text-white text-xs">
                       {sub.is_active ? "Desactivar" : "Activar"}
                     </button>
                   </td>

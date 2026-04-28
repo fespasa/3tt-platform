@@ -92,8 +92,8 @@ export default function AdminEventos() {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-2xl font-black text-navy">Eventos</h1>
-          <p className="text-gray3tt text-sm mt-1">{events.length} eventos</p>
+          <h1 className="font-display text-3xl text-white">Eventos</h1>
+          <p className="text-white/35 text-sm mt-1">{events.length} eventos</p>
         </div>
         <button onClick={openNew} className="btn-primary !text-sm !py-2 !px-5">+ Nuevo evento</button>
       </div>
@@ -102,32 +102,32 @@ export default function AdminEventos() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-gray/20 text-left">
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Imagen</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Título</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Tipo</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Fecha</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Precio</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Estado</th>
-                <th className="px-4 py-3 text-xs font-bold text-gray3tt uppercase">Acciones</th>
+              <tr className="border-b border-white/[0.06] text-left">
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Imagen</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Título</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Tipo</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Fecha</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Precio</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Estado</th>
+                <th className="px-4 py-3 text-xs font-bold text-white/35 uppercase">Acciones</th>
               </tr>
             </thead>
             <tbody>
               {events.length === 0 && (
-                <tr><td colSpan={7} className="px-4 py-12 text-center text-gray3tt">
+                <tr><td colSpan={7} className="px-4 py-12 text-center text-white/30">
                   <div className="text-4xl mb-2">📅</div>
                   No hay eventos aún. ¡Crea el primero!
                 </td></tr>
               )}
               {events.map(ev => (
-                <tr key={ev.id} className="border-b border-gray/10 hover:bg-offwhite/50">
+                <tr key={ev.id} className="border-b border-white/[0.04] hover:bg-white/[0.03]">
                   <td className="px-4 py-2">
                     <img src={ev.thumbnail_url || "https://images.unsplash.com/photo-1547347298-4571f8a4e68a?w=600&h=400&fit=crop"} alt="" className="w-16 h-10 object-cover rounded-lg" />
                   </td>
-                  <td className="px-4 py-3 font-semibold text-navy max-w-[180px] truncate">{ev.title}</td>
+                  <td className="px-4 py-3 font-semibold text-white max-w-[180px] truncate">{ev.title}</td>
                   <td className="px-4 py-3"><span className="badge badge-navy text-[10px]">{ev.type}</span></td>
                   <td className="px-4 py-3 text-gray3tt text-xs">{fmtDate(ev.start_date)}</td>
-                  <td className="px-4 py-3 text-navy font-semibold">{ev.price ? `${ev.price}€` : "Gratis"}</td>
+                  <td className="px-4 py-3 text-white font-semibold">{ev.price ? `${ev.price}€` : "Gratis"}</td>
                   <td className="px-4 py-3"><StatusBadge status={ev.status ?? "draft"} /></td>
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2">
@@ -146,75 +146,75 @@ export default function AdminEventos() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Título</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Título</label>
               <input className="input" value={form.title} onChange={e => set("title", e.target.value)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Slug</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Slug</label>
               <input className="input font-mono" value={form.slug} onChange={e => set("slug", e.target.value)} />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Tipo</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Tipo</label>
               <select className="input" value={form.type} onChange={e => set("type", e.target.value)}>
                 {EVENT_TYPES.map(t => <option key={t.value} value={t.value}>{t.label}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Estado</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Estado</label>
               <select className="input" value={form.status} onChange={e => set("status", e.target.value)}>
                 {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Aforo</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Aforo</label>
               <input className="input" type="number" value={form.capacity} onChange={e => set("capacity", parseInt(e.target.value) || 0)} />
             </div>
           </div>
           <div>
-            <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Descripción</label>
+            <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Descripción</label>
             <textarea className="input" rows={3} value={form.description} onChange={e => set("description", e.target.value)} />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Inicio</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Inicio</label>
               <input className="input" type="datetime-local" value={form.start_date} onChange={e => set("start_date", e.target.value)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Fin</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Fin</label>
               <input className="input" type="datetime-local" value={form.end_date} onChange={e => set("end_date", e.target.value)} />
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Precio</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Precio</label>
               <input className="input" type="number" step="0.01" value={form.price} onChange={e => set("price", parseFloat(e.target.value) || 0)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Precio miembros</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Precio miembros</label>
               <input className="input" type="number" step="0.01" value={form.price_member} onChange={e => set("price_member", parseFloat(e.target.value) || 0)} />
             </div>
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Ubicación</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Ubicación</label>
               <input className="input" value={form.location} onChange={e => set("location", e.target.value)} />
             </div>
           </div>
           <div>
-            <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">Thumbnail URL</label>
+            <label className="text-xs font-bold text-white/35 uppercase mb-1 block">Thumbnail URL</label>
             <input className="input" value={form.thumbnail_url} onChange={e => set("thumbnail_url", e.target.value)} placeholder="Se autoasigna si vacío" />
           </div>
           <label className="flex items-center gap-2 cursor-pointer">
             <input type="checkbox" checked={form.is_online} onChange={e => set("is_online", e.target.checked)} className="accent-teal w-4 h-4" />
-            <span className="text-sm font-medium text-navy">Evento online</span>
+            <span className="text-sm font-medium text-white/70">Evento online</span>
           </label>
           {form.is_online && (
             <div>
-              <label className="text-xs font-bold text-gray3tt uppercase mb-1 block">URL del evento online</label>
+              <label className="text-xs font-bold text-white/35 uppercase mb-1 block">URL del evento online</label>
               <input className="input" value={form.online_url} onChange={e => set("online_url", e.target.value)} />
             </div>
           )}
-          <div className="flex justify-end gap-3 pt-3 border-t border-gray/20">
+          <div className="flex justify-end gap-3 pt-3 border-t border-white/[0.06]">
             <button onClick={() => setModalOpen(false)} className="btn-secondary !py-2 !px-4 !text-sm">Cancelar</button>
             <button onClick={save} disabled={saving || !form.title || !form.slug || !form.start_date || !form.end_date} className="btn-primary !py-2 !px-4 !text-sm">
               {saving ? "Guardando..." : editing ? "Guardar" : "Crear evento"}
