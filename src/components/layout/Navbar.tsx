@@ -1,13 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Menu, X, LogOut, User } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 import type { User as SupabaseUser } from "@supabase/supabase-js";
 import ThemeToggle from "@/components/ThemeToggle";
+import Logo3TT from "@/components/Logo3TT";
 
 const NAV_LINKS = [
   { href: "/academia",  label: "Academia"  },
@@ -56,13 +56,7 @@ export default function Navbar() {
     }`} style={scrolled ? { background: "var(--bg-nav)", borderColor: "var(--border)" } : undefined}>
       {/* Logo */}
       <Link href="/" className="flex items-center gap-3 mr-auto group">
-        <Image
-          src="/images/logo-3tt.svg"
-          alt="3TT"
-          width={32}
-          height={38}
-          className="transition-transform duration-300 group-hover:scale-110"
-        />
+        <Logo3TT size={32} className="transition-transform duration-300 group-hover:scale-110" />
         <span className="text-foreground font-display text-xl tracking-wider">3TOUCH TRIBE</span>
       </Link>
 

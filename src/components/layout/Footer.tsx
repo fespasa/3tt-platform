@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import Logo3TT from "@/components/Logo3TT";
 
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
         <div className="col-span-2 md:col-span-1">
           <div className="flex items-center gap-2.5 mb-4">
-            <Image src="/images/logo-3tt.svg" alt="3TT" width={24} height={29} />
+            <Logo3TT size={24} />
             <span className="text-foreground font-display text-lg tracking-wider">3TOUCH TRIBE</span>
           </div>
           <p className="text-muted text-xs leading-relaxed max-w-[200px]">

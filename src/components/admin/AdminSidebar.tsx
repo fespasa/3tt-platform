@@ -1,8 +1,8 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
+import Logo3TT from "@/components/Logo3TT";
 
 const NAV = [
   { href: "/admin",           label: "Dashboard",   icon: "📊" },
@@ -33,7 +33,7 @@ export default function AdminSidebar({ open, onClose }: { open: boolean; onClose
       >
         <div className="px-6 py-5" style={{ borderBottom: "1px solid var(--border)" }}>
           <Link href="/admin" className="flex items-center gap-3" onClick={onClose}>
-            <Image src="/images/logo-3tt.svg" alt="3TT" width={24} height={29} />
+            <Logo3TT size={24} />
             <div>
               <p className="font-display text-lg tracking-wider text-foreground">3TT ADMIN</p>
               <p className="text-[10px] text-muted uppercase tracking-wider">Panel de gestión</p>

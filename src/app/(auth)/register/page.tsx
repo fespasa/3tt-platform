@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import Logo3TT from "@/components/Logo3TT";
 
 export const metadata: Metadata = { title: "Crear cuenta" };
 
@@ -21,7 +21,7 @@ export default function RegisterPage() {
         <div className="card backdrop-blur-xl rounded-3xl p-8 md:p-10">
           <div className="text-center mb-8">
             <Link href="/" className="inline-block mb-5">
-              <Image src="/images/logo-3tt.svg" alt="3TT" width={48} height={58} className="mx-auto" />
+              <Logo3TT size={48} className="mx-auto" />
             </Link>
             <h1 className="font-display text-4xl text-foreground tracking-tight">Únete a la Tribu</h1>
             <p className="text-muted text-sm mt-2">Crea tu cuenta gratuita en 3Touch Tribe</p>

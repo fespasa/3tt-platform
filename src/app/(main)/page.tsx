@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { createClient } from "@/lib/supabase/server";
+import Logo3TT from "@/components/Logo3TT";
 import { ArrowRight, Play, Users, BookOpen, Mic, Calendar, ChevronRight, Zap, Trophy, Globe } from "lucide-react";
 import HeroBackground from "@/components/home/HeroBackground";
 import ScrollReveal from "@/components/home/ScrollReveal";
@@ -96,14 +96,7 @@ export default async function HomePage() {
               <div className="relative">
                 {/* Glow behind logo */}
                 <div className="absolute inset-0 scale-150 bg-teal/[0.06] rounded-full blur-[60px]" />
-                <Image
-                  src="/images/logo-3tt.svg"
-                  alt="3Touch Tribe"
-                  width={280}
-                  height={340}
-                  className="relative drop-shadow-[0_0_40px_rgba(0,168,168,0.15)]"
-                  priority
-                />
+                <Logo3TT size={280} className="relative drop-shadow-[0_0_40px_rgba(0,168,168,0.15)]" />
               </div>
             </div>
           </div>
