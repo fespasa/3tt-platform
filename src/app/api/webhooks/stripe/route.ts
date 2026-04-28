@@ -18,6 +18,37 @@ export async function POST(req: Request) {
   const supabase = createAdminClient();
 
   switch (event.type) {
+    case "checkout.session.completed": {
+      const session = event.data.object as Stripe.Checkout.Session;
+      const { course_id, user_id, type: metaType } = session.metadata ?? {};
+
+      if (metaType === "course_purchase" && course_id && user_id) {
+        // Create payment record
+        const { data: payment } = await supabase
+          .from("payments")
+          .insert({
+            user_id,
+            amount: (session.amount_total ?? 0) / 100,
+            currency: session.currency ?? "eur",
+            type: "course",
+            reference_id: course_id,
+            stripe_payment_id: session.payment_intent as string,
+            status: "completed",
+          })
+          .select("id")
+          .single();
+
+        // Create enrollment
+        await supabase
+          .from("course_enrollments")
+          .upsert(
+            { user_id, course_id, payment_id: payment?.id ?? null },
+            { onConflict: "user_id,course_id" }
+          );
+      }
+      break;
+    }
+
     case "payment_intent.succeeded": {
       const pi = event.data.object as Stripe.PaymentIntent;
       const { user_id, type, reference_id } = pi.metadata;
