@@ -1,8 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Menu, X, LogOut, User } from "lucide-react";
+import { createClient } from "@/lib/supabase/client";
+import type { User as SupabaseUser } from "@supabase/supabase-js";
 
 const NAV_LINKS = [
   { href: "/academia",  label: "Academia"  },
@@ -13,6 +16,35 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
+  const [loggingOut, setLoggingOut] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    const supabase = createClient();
+
+    // Check initial session
+    supabase.auth.getUser().then(({ data }) => {
+      setUser(data.user);
+    });
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  async function handleLogout() {
+    setLoggingOut(true);
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    setUser(null);
+    router.push("/");
+    router.refresh();
+    setLoggingOut(false);
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-navy-deep/95 backdrop-blur-md border-b border-teal/10 h-[70px] flex items-center px-6 md:px-[6%]">
@@ -44,10 +76,27 @@ export default function Navbar() {
         ))}
       </ul>
 
-      {/* CTA */}
-      <Link href="/login" className="hidden md:inline-flex ml-8 btn-primary !py-2 !px-5 text-sm">
-        Acceder
-      </Link>
+      {/* Auth CTA */}
+      {user ? (
+        <div className="hidden md:flex items-center gap-3 ml-8">
+          <Link href="/perfil" className="flex items-center gap-2 text-white/70 hover:text-teal text-sm transition-colors">
+            <User size={16} />
+            <span>{user.user_metadata?.username || user.email?.split("@")[0]}</span>
+          </Link>
+          <button
+            onClick={handleLogout}
+            disabled={loggingOut}
+            className="text-white/40 hover:text-red-400 transition-colors p-1.5 rounded-lg hover:bg-white/5"
+            title="Cerrar sesión"
+          >
+            <LogOut size={16} />
+          </button>
+        </div>
+      ) : (
+        <Link href="/login" className="hidden md:inline-flex ml-8 btn-primary !py-2 !px-5 text-sm">
+          Acceder
+        </Link>
+      )}
 
       {/* Mobile menu toggle */}
       <button
@@ -66,7 +115,18 @@ export default function Navbar() {
               {l.label}
             </Link>
           ))}
-          <Link href="/login" className="btn-primary text-center" onClick={() => setOpen(false)}>Acceder</Link>
+          {user ? (
+            <>
+              <Link href="/perfil" className="text-white/70 hover:text-teal font-medium flex items-center gap-2" onClick={() => setOpen(false)}>
+                <User size={16} /> {user.user_metadata?.username || user.email?.split("@")[0]}
+              </Link>
+              <button onClick={() => { handleLogout(); setOpen(false); }} className="text-red-400 font-medium text-left flex items-center gap-2">
+                <LogOut size={16} /> Cerrar sesión
+              </button>
+            </>
+          ) : (
+            <Link href="/login" className="btn-primary text-center" onClick={() => setOpen(false)}>Acceder</Link>
+          )}
         </div>
       )}
     </nav>
