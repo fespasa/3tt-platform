@@ -1,6 +1,3 @@
-// Auto-generado desde Supabase (sxfzgbvwlxikonohczeo)
-// Regenerar: npx supabase gen types typescript --project-id sxfzgbvwlxikonohczeo
-
 export type Json =
   | string
   | number
@@ -126,6 +123,52 @@ export type Database = {
           views?: number | null
         }
         Relationships: []
+      }
+      course_certificates: {
+        Row: {
+          certificate_number: string
+          course_id: string
+          id: string
+          issued_at: string | null
+          user_id: string
+        }
+        Insert: {
+          certificate_number: string
+          course_id: string
+          id?: string
+          issued_at?: string | null
+          user_id: string
+        }
+        Update: {
+          certificate_number?: string
+          course_id?: string
+          id?: string
+          issued_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "course_certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "course_certificates_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "v_courses_with_instructor"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "course_certificates_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       course_enrollments: {
         Row: {
@@ -796,6 +839,55 @@ export type Database = {
         }
         Relationships: []
       }
+      module_quizzes: {
+        Row: {
+          course_id: string
+          created_at: string | null
+          id: string
+          module_id: string
+          passing_score: number
+          title: string
+        }
+        Insert: {
+          course_id: string
+          created_at?: string | null
+          id?: string
+          module_id: string
+          passing_score?: number
+          title?: string
+        }
+        Update: {
+          course_id?: string
+          created_at?: string | null
+          id?: string
+          module_id?: string
+          passing_score?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "module_quizzes_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "courses"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "module_quizzes_course_id_fkey"
+            columns: ["course_id"]
+            isOneToOne: false
+            referencedRelation: "v_courses_with_instructor"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "module_quizzes_module_id_fkey"
+            columns: ["module_id"]
+            isOneToOne: false
+            referencedRelation: "course_modules"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string | null
@@ -958,6 +1050,115 @@ export type Database = {
           username?: string | null
         }
         Relationships: []
+      }
+      quiz_attempts: {
+        Row: {
+          answers: Json | null
+          completed_at: string | null
+          id: string
+          passed: boolean
+          quiz_id: string
+          score: number
+          user_id: string
+        }
+        Insert: {
+          answers?: Json | null
+          completed_at?: string | null
+          id?: string
+          passed: boolean
+          quiz_id: string
+          score: number
+          user_id: string
+        }
+        Update: {
+          answers?: Json | null
+          completed_at?: string | null
+          id?: string
+          passed?: boolean
+          quiz_id?: string
+          score?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_attempts_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "module_quizzes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "quiz_attempts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_options: {
+        Row: {
+          id: string
+          is_correct: boolean
+          option_text: string
+          position: number
+          question_id: string
+        }
+        Insert: {
+          id?: string
+          is_correct?: boolean
+          option_text: string
+          position?: number
+          question_id: string
+        }
+        Update: {
+          id?: string
+          is_correct?: boolean
+          option_text?: string
+          position?: number
+          question_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_options_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "quiz_questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      quiz_questions: {
+        Row: {
+          created_at: string | null
+          id: string
+          position: number
+          question_text: string
+          quiz_id: string
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          position?: number
+          question_text: string
+          quiz_id: string
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          position?: number
+          question_text?: string
+          quiz_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "quiz_questions_quiz_id_fkey"
+            columns: ["quiz_id"]
+            isOneToOne: false
+            referencedRelation: "module_quizzes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       revenue_share_records: {
         Row: {
@@ -1361,17 +1562,44 @@ export const Constants = {
   },
 } as const
 
-// ─── Domain aliases ──────────────────────────────────────────
-export type Profile = Tables<"profiles">
+
+// ═══════════════════════════════════════════
+// Domain type aliases
+// ═══════════════════════════════════════════
+
+type Tables<T extends keyof Database["public"]["Tables"]> = Database["public"]["Tables"][T]["Row"]
+type Views<T extends keyof Database["public"]["Views"]> = Database["public"]["Views"][T]["Row"]
+type Enums<T extends keyof Database["public"]["Enums"]> = Database["public"]["Enums"][T]
+
+// Core types
 export type Course = Tables<"courses">
-export type CourseWithInstructor = Tables<"v_courses_with_instructor">
-export type CollaboratorEarnings = Tables<"v_collaborator_earnings">
-export type ForumThread = Tables<"forum_threads">
-export type ForumCategory = Tables<"forum_categories">
-export type Event = Tables<"events">
-export type MembershipPlan = Tables<"membership_plans">
-export type ContentItem = Tables<"content_items">
-export type UserRole = Enums<"user_role">
-export type MembershipType = Enums<"membership_type">
+export type CourseWithInstructor = Views<"v_courses_with_instructor">
 export type CourseLevel = Enums<"course_level">
 export type Discipline = Enums<"discipline">
+
+// Course sub-types
+export type CourseModule = Tables<"course_modules">
+export type CourseLesson = Tables<"course_lessons">
+export type CourseEnrollment = Tables<"course_enrollments">
+export type CourseReview = Tables<"course_reviews">
+export type LessonProgress = Tables<"lesson_progress">
+
+// Quiz types
+export type ModuleQuiz = Tables<"module_quizzes">
+export type QuizQuestion = Tables<"quiz_questions">
+export type QuizOption = Tables<"quiz_options">
+export type QuizAttempt = Tables<"quiz_attempts">
+
+// Certificate types
+export type CourseCertificate = Tables<"course_certificates">
+
+// Composite types for frontend
+export type ModuleWithLessons = CourseModule & {
+  course_lessons: CourseLesson[];
+}
+
+export type QuizWithQuestions = ModuleQuiz & {
+  quiz_questions: (QuizQuestion & {
+    quiz_options: QuizOption[];
+  })[];
+}
