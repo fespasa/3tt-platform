@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" fill="none">
+  <defs>
+    <linearGradient id="tealGrad" x1="0" y1="0" x2="400" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#008080"/>
+      <stop offset="50%" stop-color="#00A8A8"/>
+      <stop offset="100%" stop-color="#00CCCC"/>
+    </linearGradient>
+    <clipPath id="shieldClip">
+      <path d="M200 0 L390 60 L390 300 Q390 400 200 475 Q10 400 10 300 L10 60 Z"/>
+    </clipPath>
+  </defs>
+
+  <g clip-path="url(#shieldClip)">
+    <!-- Background -->
+    <rect width="400" height="480" fill="#0D1520"/>
+
+    <!-- "3" character - angular geometric -->
+    <!-- Top bar of 3 -->
+    <path d="M30 50 L170 50 L170 100 L80 100 L80 50" fill="#1B2330" stroke="#1B2330" stroke-width="2"/>
+    <rect x="30" y="50" width="140" height="50" rx="4" fill="#1B2330"/>
+    <!-- Middle bar of 3 -->
+    <rect x="30" y="130" width="140" height="50" rx="4" fill="#1B2330"/>
+    <!-- Bottom bar of 3 -->
+    <rect x="30" y="210" width="140" height="50" rx="4" fill="#1B2330"/>
+    <!-- Right vertical connecting top-mid -->
+    <rect x="120" y="50" width="50" height="130" rx="4" fill="#1B2330"/>
+    <!-- Right vertical connecting mid-bottom -->
+    <rect x="120" y="130" width="50" height="130" rx="4" fill="#1B2330"/>
+
+    <!-- Angular cuts to make it geometric/sharp -->
+    <!-- Diagonal cuts on 3 -->
+    <polygon points="30,50 80,50 30,90" fill="#0D1520"/>
+    <polygon points="30,130 70,130 30,165" fill="#0D1520"/>
+    <polygon points="30,210 70,210 30,245" fill="#0D1520"/>
+    <polygon points="170,90 170,100 130,100" fill="#0D1520"/>
+    <polygon points="170,170 170,180 130,180" fill="#0D1520"/>
+    <polygon points="170,250 170,260 130,260" fill="#0D1520"/>
+
+    <!-- First "T" -->
+    <rect x="190" y="50" width="90" height="50" rx="4" fill="#1B2330"/>
+    <rect x="215" y="50" width="40" height="210" rx="4" fill="#1B2330"/>
+    <!-- Angular cuts on T -->
+    <polygon points="190,50 215,50 190,75" fill="#0D1520"/>
+    <polygon points="280,50 280,75 255,50" fill="#0D1520"/>
+
+    <!-- Second "T" -->
+    <rect x="295" y="50" width="90" height="50" rx="4" fill="#1B2330"/>
+    <rect x="320" y="50" width="40" height="210" rx="4" fill="#1B2330"/>
+    <!-- Angular cuts on T -->
+    <polygon points="295,50 320,50 295,75" fill="#0D1520"/>
+    <polygon points="385,50 385,75 360,50" fill="#0D1520"/>
+
+    <!-- Teal accent bar at bottom -->
+    <path d="M10 360 Q10 400 200 475 Q390 400 390 360 L390 390 Q390 430 200 475 Q10 430 10 390 Z" fill="url(#tealGrad)"/>
+    <rect x="10" y="370" width="380" height="45" rx="8" fill="url(#tealGrad)"/>
+  </g>
+
+  <!-- Shield outline -->
+  <path d="M200 2 L388 61 L388 300 Q388 398 200 473 Q12 398 12 300 L12 61 Z"
+        stroke="#1B2330" stroke-width="4" fill="none"/>
+</svg>

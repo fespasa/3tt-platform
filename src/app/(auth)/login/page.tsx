@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import LoginForm from "@/components/auth/LoginForm";
 
@@ -7,33 +8,36 @@ export const metadata: Metadata = { title: "Acceder" };
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen gradient-navy flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-navy-soft rounded-2xl p-8 border border-white/10">
-        <div className="text-center mb-8">
-          <svg width="40" height="40" viewBox="0 0 88 88" fill="none" className="mx-auto mb-4">
-            <rect x="4"  y="6"  width="28" height="10" rx="1.5" fill="white"/>
-            <rect x="18" y="6"  width="14" height="30" rx="1.5" fill="white"/>
-            <rect x="4"  y="28" width="28" height="10" rx="1.5" fill="white"/>
-            <rect x="18" y="28" width="14" height="30" rx="1.5" fill="white"/>
-            <rect x="4"  y="50" width="28" height="10" rx="1.5" fill="white"/>
-            <rect x="38" y="6"  width="20" height="10" rx="1.5" fill="white"/>
-            <rect x="44" y="6"  width="8"  height="54" rx="1.5" fill="white"/>
-            <rect x="62" y="6"  width="22" height="10" rx="1.5" fill="white"/>
-            <rect x="68" y="6"  width="8"  height="54" rx="1.5" fill="white"/>
-            <rect x="4"  y="74" width="80" height="10" rx="3"   fill="#00A8A8"/>
-          </svg>
-          <h1 className="text-2xl font-black text-white">Bienvenido de nuevo</h1>
-          <p className="text-white/50 text-sm mt-1">Accede a tu cuenta de 3Touch Tribe</p>
+    <div className="min-h-screen gradient-hero flex items-center justify-center px-4 relative overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-teal/[0.04] rounded-full blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-teal/[0.03] rounded-full blur-[120px]" />
+        <div className="absolute inset-0 opacity-[0.015]" style={{
+          backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)",
+          backgroundSize: "40px 40px",
+        }} />
+      </div>
+
+      <div className="relative w-full max-w-md">
+        <div className="bg-navy-soft/50 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-white/[0.06] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+          <div className="text-center mb-8">
+            <Link href="/" className="inline-block mb-5">
+              <Image src="/images/logo-3tt.svg" alt="3TT" width={48} height={58} className="mx-auto" />
+            </Link>
+            <h1 className="font-display text-4xl text-white tracking-tight">Bienvenido de nuevo</h1>
+            <p className="text-white/35 text-sm mt-2">Accede a tu cuenta de 3Touch Tribe</p>
+          </div>
+
+          <Suspense fallback={<div className="text-white/30 text-center py-4">Cargando...</div>}>
+            <LoginForm />
+          </Suspense>
+
+          <p className="text-center text-white/30 text-sm mt-8">
+            ¿No tienes cuenta?{" "}
+            <Link href="/register" className="text-teal hover:text-teal-light font-semibold transition-colors">Regístrate</Link>
+          </p>
         </div>
-
-        <Suspense fallback={<div className="text-white/50 text-center py-4">Cargando…</div>}>
-          <LoginForm />
-        </Suspense>
-
-        <p className="text-center text-white/40 text-sm mt-6">
-          ¿No tienes cuenta?{" "}
-          <Link href="/register" className="text-teal hover:text-teal-light font-semibold">Regístrate</Link>
-        </p>
       </div>
     </div>
   );

@@ -35,7 +35,6 @@ export default function LoginForm() {
         return;
       }
 
-      // Login exitoso — redirigir
       router.push(redirectTo);
       router.refresh();
     } catch {
@@ -46,15 +45,15 @@ export default function LoginForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-5">
       {error && (
-        <div className="bg-red-500/10 border border-red-500/30 text-red-400 text-sm rounded-lg px-4 py-3">
+        <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm rounded-xl px-4 py-3">
           {error}
         </div>
       )}
 
       <div>
-        <label className="text-white/70 text-xs font-semibold uppercase tracking-wide block mb-1.5">
+        <label className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1.5">
           Email
         </label>
         <input
@@ -63,12 +62,12 @@ export default function LoginForm() {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="input !bg-navy !border-white/15 !text-white placeholder:!text-white/30"
+          className="input"
         />
       </div>
 
       <div>
-        <label className="text-white/70 text-xs font-semibold uppercase tracking-wide block mb-1.5">
+        <label className="text-white/50 text-xs font-semibold uppercase tracking-wider block mb-1.5">
           Contraseña
         </label>
         <input
@@ -77,7 +76,7 @@ export default function LoginForm() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
-          className="input !bg-navy !border-white/15 !text-white placeholder:!text-white/30"
+          className="input"
         />
       </div>
 
@@ -86,7 +85,7 @@ export default function LoginForm() {
         disabled={loading}
         className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? "Accediendo…" : "Acceder"}
+        {loading ? "Accediendo..." : "Acceder"}
       </button>
     </form>
   );
