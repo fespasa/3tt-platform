@@ -87,7 +87,7 @@ function EventCard({ event, past = false }: { event: Event; past?: boolean }) {
         </div>
         <div className="flex items-center justify-between">
           <div>
-            <span className="font-black text-navy text-sm">{event.price === 0 ? "Gratis" : formatPrice(event.price)}</span>
+            <span className="font-black text-navy text-sm">{!event.price ? "Gratis" : formatPrice(event.price)}</span>
             {event.price_member && (
               <span className="text-xs text-teal ml-2">{formatPrice(event.price_member)} socios</span>
             )}

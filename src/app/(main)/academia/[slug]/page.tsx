@@ -28,7 +28,7 @@ export default async function CourseDetailPage({ params }: Props) {
   const { data: modules } = await supabase
     .from("course_modules")
     .select("*, course_lessons(*)")
-    .eq("course_id", course.id)
+    .eq("course_id", course.id!)
     .order("position");
 
   const totalLessons = modules?.reduce((acc, m) => acc + (m.course_lessons?.length ?? 0), 0) ?? 0;
@@ -45,7 +45,7 @@ export default async function CourseDetailPage({ params }: Props) {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-8 h-8 rounded-full bg-teal/20 flex items-center justify-center text-sm overflow-hidden">
                 {course.instructor_avatar
-                  ? <img src={course.instructor_avatar} alt={course.instructor_name} className="w-full h-full object-cover" />
+                  ? <img src={course.instructor_avatar} alt={course.instructor_name ?? ""} className="w-full h-full object-cover" />
                   : "👤"
                 }
               </div>
@@ -61,10 +61,10 @@ export default async function CourseDetailPage({ params }: Props) {
           {/* Purchase card */}
           <div className="md:col-span-2 bg-white rounded-2xl p-6 shadow-xl">
             {course.thumbnail_url && (
-              <img src={course.thumbnail_url} alt={course.title} className="w-full aspect-video object-cover rounded-xl mb-5" />
+              <img src={course.thumbnail_url} alt={course.title ?? ""} className="w-full aspect-video object-cover rounded-xl mb-5" />
             )}
             <div className="text-3xl font-black text-navy mb-4">
-              {course.price === 0 ? "Gratis" : formatPrice(course.price)}
+              {course.price === 0 || !course.price ? "Gratis" : formatPrice(course.price)}
             </div>
             <button className="btn-primary w-full text-center mb-3">
               {course.price === 0 ? "Acceder al curso" : "Comprar ahora"}
@@ -105,12 +105,12 @@ export default async function CourseDetailPage({ params }: Props) {
                       <span className="text-xs text-gray3tt">{mod.course_lessons?.length ?? 0} lecciones</span>
                     </summary>
                     <div className="border-t border-gray/10">
-                      {(mod.course_lessons ?? []).map((lesson: { id: string; title: string; is_preview: boolean; video_duration: number }) => (
+                      {(mod.course_lessons ?? []).map((lesson) => (
                         <div key={lesson.id} className="flex items-center gap-3 px-4 py-3 text-sm border-b border-gray/10 last:border-0">
                           <span className="text-teal">{lesson.is_preview ? "▶" : "🔒"}</span>
                           <span className="flex-1 text-navy/80">{lesson.title}</span>
-                          {lesson.video_duration > 0 && (
-                            <span className="text-xs text-gray3tt">{Math.floor(lesson.video_duration / 60)}:{String(lesson.video_duration % 60).padStart(2, "0")}</span>
+                          {(lesson.video_duration ?? 0) > 0 && (
+                            <span className="text-xs text-gray3tt">{Math.floor((lesson.video_duration ?? 0) / 60)}:{String((lesson.video_duration ?? 0) % 60).padStart(2, "0")}</span>
                           )}
                         </div>
                       ))}
@@ -129,7 +129,7 @@ export default async function CourseDetailPage({ params }: Props) {
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-full bg-offwhite overflow-hidden flex-shrink-0">
                 {course.instructor_avatar
-                  ? <img src={course.instructor_avatar} alt={course.instructor_name} className="w-full h-full object-cover" />
+                  ? <img src={course.instructor_avatar} alt={course.instructor_name ?? ""} className="w-full h-full object-cover" />
                   : <div className="w-full h-full flex items-center justify-center text-2xl">👤</div>
                 }
               </div>

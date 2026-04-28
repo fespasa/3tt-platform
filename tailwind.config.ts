@@ -20,6 +20,7 @@ const config: Config = {
           light:   "#00CCCC",
         },
         gray3tt: "#9AA3AF",
+        gray: "#9AA3AF",
         offwhite: "#F2F2F2",
       },
       fontFamily: {
