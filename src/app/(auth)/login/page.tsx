@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
+import LoginForm from "@/components/auth/LoginForm";
 
 export const metadata: Metadata = { title: "Acceder" };
 
@@ -24,18 +26,9 @@ export default function LoginPage() {
           <p className="text-white/50 text-sm mt-1">Accede a tu cuenta de 3Touch Tribe</p>
         </div>
 
-        {/* TODO: LoginForm client component con Supabase Auth */}
-        <form className="space-y-4">
-          <div>
-            <label className="text-white/70 text-xs font-semibold uppercase tracking-wide block mb-1.5">Email</label>
-            <input type="email" placeholder="tu@email.com" className="input !bg-navy !border-white/15 !text-white placeholder:!text-white/30" />
-          </div>
-          <div>
-            <label className="text-white/70 text-xs font-semibold uppercase tracking-wide block mb-1.5">Contraseña</label>
-            <input type="password" placeholder="••••••••" className="input !bg-navy !border-white/15 !text-white placeholder:!text-white/30" />
-          </div>
-          <button type="submit" className="btn-primary w-full">Acceder</button>
-        </form>
+        <Suspense fallback={<div className="text-white/50 text-center py-4">Cargando…</div>}>
+          <LoginForm />
+        </Suspense>
 
         <p className="text-center text-white/40 text-sm mt-6">
           ¿No tienes cuenta?{" "}
