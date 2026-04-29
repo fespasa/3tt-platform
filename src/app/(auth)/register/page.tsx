@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import Logo3TT from "@/components/Logo3TT";
+import RegisterForm from "@/components/auth/RegisterForm";
 
 export const metadata: Metadata = { title: "Crear cuenta" };
 
@@ -27,29 +29,9 @@ export default function RegisterPage() {
             <p className="text-muted text-sm mt-2">Crea tu cuenta gratuita en 3Touch Tribe</p>
           </div>
 
-          <form className="space-y-4">
-            <div>
-              <label className="text-secondary text-xs font-semibold uppercase tracking-wider block mb-1.5">Nombre completo</label>
-              <input type="text" placeholder="Tu nombre" className="input" />
-            </div>
-            <div>
-              <label className="text-secondary text-xs font-semibold uppercase tracking-wider block mb-1.5">Email</label>
-              <input type="email" placeholder="tu@email.com" className="input" />
-            </div>
-            <div>
-              <label className="text-secondary text-xs font-semibold uppercase tracking-wider block mb-1.5">Contraseña</label>
-              <input type="password" placeholder="Mínimo 8 caracteres" className="input" />
-            </div>
-            <div>
-              <label className="text-secondary text-xs font-semibold uppercase tracking-wider block mb-1.5">¿Eres?</label>
-              <select className="input">
-                <option value="player">Jugador/a</option>
-                <option value="coach">Entrenador/a</option>
-                <option value="professional">Profesional del deporte</option>
-              </select>
-            </div>
-            <button type="submit" className="btn-primary w-full">Crear cuenta gratis</button>
-          </form>
+          <Suspense fallback={<div className="text-muted text-center py-4">Cargando...</div>}>
+            <RegisterForm />
+          </Suspense>
 
           <p className="text-center text-muted text-sm mt-8">
             ¿Ya tienes cuenta?{" "}
